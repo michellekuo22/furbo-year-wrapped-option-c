@@ -653,3 +653,20 @@ html.fullscreen .statusbar,html.fullscreen .sb-plain{display:none}
 html,body{overscroll-behavior:none}
 #viewport{touch-action:none}
 @media (max-width:520px),(pointer:coarse){.statusbar,.sb-plain{display:none}#hint{display:none}}
+
+/* ---- full-screen phones: page fills edge to edge; side areas continue the page colours ---- */
+#sides{display:none}
+html.fullscreen #sides{display:block;position:absolute;inset:0}
+.sf{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.sf.on{opacity:1}
+.sf .l,.sf .r{position:absolute;top:0;bottom:0;width:51%}
+.sf .l{left:0}.sf .r{right:0}
+html.fullscreen #phone{width:100%;height:100%;background:#fff}
+html.fullscreen #stage{left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--scale));transform-origin:center center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%)}
+
+/* page 5: sound waves sit in the exact middle of each bubble (flex centring, no offsets) */
+.s5 .chip{display:flex;align-items:center;justify-content:center}
+.s5 .chip .wf{position:static!important;width:72%!important;height:auto!important;transform:none;margin:0 0 9% 0;animation:wfBeat 1.1s ease-in-out infinite}
+.s5 .chipR .wf{animation-name:wfBeat;rotate:-176deg;margin:0 0 9% 0}
+@keyframes wfBeat{0%,100%{transform:scaleY(.7)}50%{transform:scaleY(1.15)}}

@@ -145,6 +145,7 @@
     countUp(to);
     if (n === 1) { $('.s11').classList.remove('revealing'); }
     buzz(8);
+    syncSides(n);
     history.replaceState(null, '', '#' + n);
   }
   const next = () => cur === 10 ? reveal() : go(cur + 1);
@@ -332,6 +333,31 @@
     ENTER[n].forEach(([sel, kind, d]) => $$(sel, scr).forEach((el, i) => wrapEnter(el, kind === 'u' && i % 2 ? 'r' : kind, +(d + i * .12).toFixed(2), scr)));
   });
   $$('.screen').forEach(scr => $$('.star', scr).forEach((el, i) => wrapEnter(el, 'pop', +(.35 + i * .13).toFixed(2), scr)));
+
+
+  /* ---------- full-screen phones: soft side fills so the page reaches the screen edges (no white columns) ---------- */
+  const EDGE = {"1": {"l": ["#fae290", "#fadf82", "#f8e6ab", "#ccbaa6", "#e6dcb2", "#fdf9e7", "#f7faf6", "#dbedfd", "#cee6fd", "#d0e6fd"], "r": ["#e5f2f7", "#dfeefb", "#cfe7fb", "#b49f81", "#edeced", "#faf9ff", "#fbf6ad", "#efd9ff", "#f1dcff", "#f3e1ff"]}, "2": {"l": ["#fdf3cf", "#fdeebd", "#fdefc1", "#fcecbd", "#fcf3e5", "#f6eafd", "#ded7fe", "#f7ebff", "#f9f1ff", "#fdf9ff"], "r": ["#fffdf9", "#fdf9fb", "#faf1fd", "#f2e0ff", "#efd8ff", "#f7edfd", "#ececd7", "#fdf7e1", "#fefaec", "#fefdfa"]}, "3": {"l": ["#fdf5e6", "#fbf2eb", "#f6eaf5", "#f2dffc", "#f2e0ff", "#fcc3fc", "#fafaf9", "#fdfcf3", "#fffdf4", "#fffdf7"], "r": ["#fefefd", "#fffffe", "#fdfeff", "#f3f9ff", "#d7e7fc", "#d5e7fb", "#eaf3f6", "#f9f6e9", "#fdf6e0", "#fef9e4"]}, "4": {"l": ["#f2e0ff", "#f2e1ff", "#f6e9ff", "#faf5ff", "#fcf8ff", "#f7f3fe", "#d9f3fe", "#f8fbff", "#f9fcff", "#fcfeff"], "r": ["#faf4ff", "#fdfaff", "#f8edfe", "#eef7fe", "#ecf6fe", "#e7eefe", "#e2e7fe", "#edf4fe", "#f7fbfe", "#f7fbfe"]}, "5": {"l": ["#fdf2ce", "#fdf1c6", "#fcf2ca", "#fcf2cf", "#fceebe", "#fcedc7", "#fefaef", "#fffdfa", "#fffefd", "#ffffff"], "r": ["#fffefb", "#fefaf0", "#fef2e2", "#fee3c8", "#ffd0b0", "#ffceac", "#ffe0c8", "#fef2e4", "#fffaf5", "#fffdfd"]}, "6": {"l": ["#fdf6db", "#fdf1cc", "#fdf2d1", "#fdf2d3", "#fbf6f1", "#f8effe", "#f8eeff", "#fdfaff", "#fffeff", "#ffffff"], "r": ["#fffefb", "#fefcfb", "#fdf9fd", "#f8efff", "#f5e6ff", "#f3e3ff", "#f6e8ff", "#fcf7ff", "#fefdff", "#fffeff"]}, "7": {"l": ["#ffe5d7", "#ffdfcd", "#ffd5c0", "#fdd9ca", "#f8dee4", "#f2def7", "#f1dcfe", "#f5e5fc", "#f9f0fe", "#fdfbff"], "r": ["#f6e6fa", "#f5e3f6", "#f7e7eb", "#fefcf6", "#fef4d4", "#fdefc3", "#fdf1cd", "#fef9ea", "#fefcf5", "#fffefc"]}, "8": {"l": ["#fef4d6", "#fdf1cf", "#fde8c5", "#fedec0", "#ffe6d5", "#fffcfa", "#f1eefe", "#fcf0fc", "#fefeff", "#ffffff"], "r": ["#fef9ea", "#fef8e3", "#fef8e4", "#fefbf0", "#fbf0ed", "#f8f5fb", "#f8efff", "#fbf4ff", "#fdfbff", "#fefeff"]}, "9": {"l": ["#f5e7ff", "#f3e3ff", "#f3e4ff", "#f5ecff", "#f2f5ff", "#e6eefe", "#f6efff", "#fbf6ff", "#fdfcff", "#ffffff"], "r": ["#fefeff", "#fffeff", "#ffffff", "#ffffff", "#f4c6fc", "#fcfeff", "#f7fbff", "#ffffff", "#ffffff", "#ffffff"]}, "10": {"l": ["#ffefdf", "#ffe8d5", "#fee8d7", "#fdeee9", "#fdf6f8", "#faf3ff", "#f9f0ff", "#fefcff", "#fffeff", "#fffeff"], "r": ["#faf4ff", "#f5e7ff", "#f2e0ff", "#f3e3ff", "#f6e8ff", "#fdf9ff", "#fdfdff", "#ffffff", "#ffffff", "#ffffff"]}, "11": {"l": ["#fef8d8", "#fef2c6", "#ffe6c4", "#fecdc9", "#fee0c2", "#fef1e4", "#fefefe", "#ffffff", "#fefdff", "#fdfaff"], "r": ["#cbe4fd", "#bedefc", "#b3d6fd", "#d8c6fc", "#e5d1fd", "#fef4c8", "#fdfcfe", "#fbf8fe", "#fdf9fe", "#fefefe"]}, "12": {"l": ["#fef2c9", "#fdf2c8", "#fef1c7", "#feddb7", "#ffd8c5", "#feeace", "#feebe2", "#fee6c3", "#fee0b7", "#fedbb6"], "r": ["#bddafe", "#aed2fd", "#cadefd", "#fdefa4", "#debcfd", "#efe3fe", "#feede7", "#faf4da", "#fbedbb", "#fae6a0"]}};
+  const EDGE_Y = [2, 70, 140, 230, 330, 440, 560, 680, 760, 840];
+  const hex2 = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const med3 = (a, b, c) => [a, b, c].sort((x, y) => x - y)[1];
+  function smooth(col) {                          // median of neighbours removes photo / sticker pixels from the edge sample
+    const rgb = col.map(hex2);
+    return rgb.map((p, i) => { const q = rgb[Math.max(0, i - 1)], r = rgb[Math.min(rgb.length - 1, i + 1)]; return '#' + [0, 1, 2].map(k => med3(q[k], p[k], r[k]).toString(16).padStart(2, '0')).join(''); });
+  }
+  const sides = $('#sides');
+  if (sides) {
+    Object.keys(EDGE).forEach(n => {
+      const wrap = document.createElement('div'); wrap.className = 'sf'; wrap.dataset.n = n;
+      ['l', 'r'].forEach(sd => {
+        const d = document.createElement('div'); d.className = sd;
+        const stops = smooth(EDGE[n][sd]).map((c, i) => c + ' ' + (EDGE_Y[i] / 844 * 100).toFixed(1) + '%').join(',');
+        d.style.background = 'linear-gradient(180deg,' + stops + ')';
+        wrap.appendChild(d);
+      });
+      sides.appendChild(wrap);
+    });
+  }
+  function syncSides(n) { $$('.sf', sides || document).forEach(e => e.classList.toggle('on', +e.dataset.n === n)); }
 
   /* ---------- boot ---------- */
   const start = Math.min(TOTAL, Math.max(1, parseInt(location.hash.slice(1), 10) || 1)) - 1;
