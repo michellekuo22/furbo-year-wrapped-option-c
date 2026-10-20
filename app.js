@@ -17,7 +17,9 @@
     const w = Math.round((vv && vv.width) || innerWidth), h = Math.round((vv && vv.height) || innerHeight);
     const phoneLike = w <= 520 || h <= 520 || matchMedia('(pointer:coarse)').matches;   // phones / tablets: fill the screen, no device frame
     document.documentElement.classList.toggle('fullscreen', phoneLike);
-    const s = phoneLike ? Math.min(w / 390, h / 844) : Math.min((h - 90) / 844, (w - 40) / 390, 1.2);
+    // phones: the 54px status-bar strip at the top and the 54px strip under the Share button are empty in the design,
+    // so we scale as if the design were 760 tall. The page then spans the full screen width on nearly every phone.
+    const s = phoneLike ? Math.min(w / 390, h / 760) : Math.min((h - 90) / 844, (w - 40) / 390, 1.2);
     document.documentElement.style.setProperty('--scale', Math.max(.3, s).toFixed(4));
   }
   if (window.visualViewport) visualViewport.addEventListener('resize', () => fit());
