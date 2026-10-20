@@ -1,0 +1,35 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="297.498" height="237.416" viewBox="0 0 297.498 237.416" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Group 1597881510" filter="url(#filter0_d_0_244)">
+<g id="Polygon 1">
+<use xlink:href="#stroke0_0_244" fill="white"/>
+<mask id="stroke1_0_244" fill="white">
+<use xlink:href="#stroke0_0_244"/>
+</mask>
+<path d="M95.6603 195.521L79.4503 185.514C77.2792 184.174 74.4412 185.452 74.0052 187.965L69.631 213.184C69.0754 216.388 72.7105 218.632 75.3251 216.699L95.9092 201.487C97.9611 199.97 97.8313 196.861 95.6603 195.521Z" stroke-width="1.44187" stroke="white" mask="url(#stroke1_0_244)"/>
+</g>
+<g id="Group 1597881649">
+<g id="Ellipse 300">
+<use xlink:href="#stroke2_0_244" fill="white"/>
+<mask id="stroke3_0_244" fill="white">
+<use xlink:href="#stroke2_0_244"/>
+</mask>
+<path d="M281.498 113.468C281.498 163.717 245.664 209.999 172.349 209.999C99.0336 209.999 16 186.731 16 113.468C16 44.9585 94.1742 27.9995 147.602 27.9995C220.917 27.9995 281.498 55.559 281.498 113.468Z" stroke-width="1.44187" stroke="white" mask="url(#stroke3_0_244)"/>
+</g>
+</g>
+<path id="Vector 181" d="M273.681 56.0883C273.976 56.5168 274.407 56.849 274.914 56.9936C275.421 57.1383 275.959 57.0861 276.415 56.8443C276.872 56.6025 277.217 56.1876 277.382 55.6868C277.548 55.1858 277.516 54.6425 277.327 54.158C277.327 54.158 277.327 54.158 277.327 54.158C276.813 52.8609 276.267 51.6045 275.66 50.3418C267.38 32.4175 248.619 20.1224 229.476 16.1631C223.978 14.9481 218.265 14.9214 212.706 16.0264C211.317 16.3025 209.934 16.6489 208.568 17.0645C208.102 17.2106 207.653 17.4459 207.315 17.8036C206.978 18.1611 206.781 18.6068 206.766 19.0713C206.752 19.5358 206.92 19.993 207.235 20.371C207.549 20.7493 207.983 21.0123 208.438 21.1875C208.438 21.1875 208.438 21.1875 208.438 21.1875C209.729 21.6866 211.008 22.1616 212.273 22.6122C217.337 24.4166 222.205 25.824 227.103 26.9042C244.207 30.631 260.346 38.6142 271.388 52.9618C272.182 53.9836 272.937 55.0104 273.681 56.0883Z" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_d_0_244" x="4.76837e-07" y="3.22365" width="297.498" height="234.193" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="8"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_244"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_244" result="shape"/>
+</filter>
+<path id="stroke0_0_244" d="M75.3251 216.699C72.7105 218.632 69.0754 216.388 69.631 213.184L74.0052 187.965C74.4412 185.452 77.2792 184.174 79.4503 185.514L95.6603 195.521C97.8313 196.861 97.9611 199.97 95.9092 201.487L75.3251 216.699Z"/>
+<path id="stroke2_0_244" d="M281.498 113.468C281.498 163.717 245.664 209.999 172.349 209.999C99.0336 209.999 16 186.731 16 113.468C16 44.9585 94.1742 27.9995 147.602 27.9995C220.917 27.9995 281.498 55.559 281.498 113.468Z"/>
+</defs>
+</svg>
