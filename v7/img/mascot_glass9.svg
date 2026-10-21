@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="124.603" height="124.603" viewBox="0 0 124.603 124.603" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mask group">
+<mask id="mask0_0_22" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="125" height="125">
+<circle id="Ellipse 387" cx="62.3016" cy="62.3018" r="62.3017" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_22)">
+<circle id="Glass background" cx="62.5521" cy="60.8235" r="60.8233" fill="white" fill-opacity="0.4"/>
+</g>
+</g>
+</svg>
