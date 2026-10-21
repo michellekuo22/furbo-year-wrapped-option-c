@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon/Controls/Exit" clip-path="url(#clip0_0_25)">
+<g id="Vector">
+</g>
+<path id="Vector (Stroke)" d="M18.7049 5.29405C19.0947 5.68521 19.0937 6.31837 18.7025 6.70826L13.4095 11.9841L18.7079 17.2936C19.098 17.6846 19.0973 18.3177 18.7064 18.7079C18.3154 19.098 17.6823 19.0973 17.2921 18.7064L11.993 13.396L6.70595 18.6658C6.31479 19.0557 5.68163 19.0546 5.29174 18.6635C4.90185 18.2723 4.90289 17.6391 5.29405 17.2493L10.5802 11.9803L5.36352 6.75258C4.97341 6.36164 4.97408 5.72848 5.36501 5.33836C5.75595 4.94825 6.38911 4.94892 6.77923 5.33985L11.9968 10.5684L17.2906 5.29174C17.6818 4.90185 18.315 4.90289 18.7049 5.29405Z" fill-rule="evenodd" clip-rule="evenodd" fill="#434343"/>
+</g>
+<defs>
+<clipPath id="clip0_0_25">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
