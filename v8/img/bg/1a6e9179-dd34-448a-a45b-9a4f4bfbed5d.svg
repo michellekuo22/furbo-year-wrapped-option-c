@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="686.531" height="534.478" viewBox="0 0 686.531 534.478" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Vector" opacity="0.5" filter="url(#filter0_f_0_84)" style="mix-blend-mode:multiply">
+<path d="M326.89 211.976C354.441 208.721 380.959 196.244 407.416 201.114C432.853 205.796 433.748 222.911 447.18 234.117C460.468 245.203 489.921 254.237 486.21 266.848C482.388 279.837 445.523 284.057 429.347 294.727C415.275 304.009 421.002 321.286 398.094 324.973C373.399 328.947 352.774 309.651 326.89 311.217C294.599 313.17 276.362 336.908 244.29 334.275C216.69 332.009 208.41 313.743 201.628 300.932C195.663 289.666 207.963 278.456 208.594 266.848C209.204 255.618 193.665 243.568 205.278 233.757C216.88 223.956 244.467 221.724 266.727 217.737C286.188 214.252 306.696 214.362 326.89 211.976Z" fill-rule="evenodd" clip-rule="evenodd" fill="#DFB2FF"/>
+</g>
+<defs>
+<filter id="filter0_f_0_84" x="-3.83152e-08" y="1.91389e-08" width="686.531" height="534.478" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_0_84"/>
+</filter>
+</defs>
+</svg>
