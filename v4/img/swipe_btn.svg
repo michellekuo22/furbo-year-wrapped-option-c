@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 1597881320">
+<circle id="Ellipse 377" cx="30" cy="30" r="30" fill="url(#paint0_linear_0_174)"/>
+<g id="Icon/Navigation/Arrow_up2" clip-path="url(#clip0_0_174)">
+<g id="Vector">
+</g>
+<path id="Union" d="M41.4578 31.8582C42.0527 31.2632 42.0527 30.2988 41.4578 29.7039L31.5555 19.8015C30.9605 19.2069 29.996 19.2067 29.4012 19.8015C28.8065 20.3964 28.8066 21.3609 29.4012 21.9558L36.7039 29.2576L20.1219 29.2576C19.2806 29.2576 18.5986 29.9398 18.5984 30.781C18.5984 31.6224 19.2805 32.3045 20.1219 32.3045L36.7039 32.3045L29.4012 39.6062C28.8065 40.2011 28.8066 41.1656 29.4012 41.7605C29.9961 42.3554 30.9605 42.3554 31.5555 41.7605L41.4578 31.8582Z" fill="white" stroke-width="0.833333" stroke-linecap="round" stroke="white"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_174" x1="-4.38623e-08" y1="1.71429" x2="59.8695" y2="60.0023" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9B75FB"/>
+<stop offset="1" stop-color="#5197D8"/>
+</linearGradient>
+<clipPath id="clip0_0_174">
+<rect width="36.5625" height="36.5625" fill="white" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 48 49.0625)"/>
+</clipPath>
+</defs>
+</svg>
