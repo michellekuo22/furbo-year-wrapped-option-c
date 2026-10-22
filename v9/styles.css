@@ -760,3 +760,5 @@ html.fullscreen .s1 .cta,html.fullscreen .s1 .cover-sub{margin-top:calc(var(--vd
 .reveal-avatar{left:227px;top:281px;width:228px;height:228px;transform:none}
 .reveal-avatar img{position:absolute;inset:0;width:100%;height:100%}
 .reveal-avatar{left:244px;top:290px;width:193.8px;height:193.8px}
+
+.phone-img{top:465px!important}
