@@ -762,3 +762,16 @@ html.fullscreen .s1 .cta,html.fullscreen .s1 .cover-sub{margin-top:calc(var(--vd
 .reveal-avatar{left:244px;top:290px;width:193.8px;height:193.8px}
 
 .phone-img{top:465px!important}
+
+/* ---- gold labels (Figma refresh) ---- */
+.badge .pct{font-weight:800;font-size:22px;line-height:22px}
+.badge .pct.black{font-weight:900}
+.badge.top{position:absolute;left:0;right:0;margin:0 auto;width:max-content;top:464px;height:47px;display:flex;align-items:center;justify-content:center;border:1px solid #fff;filter:drop-shadow(0 4px 2.5px rgba(0,0,0,.15));z-index:7;overflow:hidden}
+.badge.chatbadge{display:inline-flex;align-items:center;justify-content:center;height:47px;padding:4px 16px 6px;filter:drop-shadow(0 4px 3px rgba(0,0,0,.2))}
+.badge.top>span,.badge.chatbadge>span{position:relative;top:5px}
+
+/* gold labels v3 (Figma): pages 2/3 height 44, page 7 height 40 */
+.badge.top{height:44px;padding-top:0;padding-bottom:0}
+.badge.chatbadge{height:40px;padding:0 16px}
+.badge.top>span{top:0}
+.badge.chatbadge>span{top:7px}
