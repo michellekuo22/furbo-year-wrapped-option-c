@@ -1,0 +1,747 @@
+:root{
+  --ink:#434343; --ink80:#696969; --ink90:#565656;
+  --yellow:#F7CD3D; --yellow60:#FAE18B; --yellow40:#FCEBB1;
+  --grad:linear-gradient(155deg,#9B75FB 1.4%,#5197D8 99.9%);
+  --scale:1;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:#EDE7F6;font-family:'Poppins',system-ui,sans-serif;color:var(--ink);-webkit-user-select:none;user-select:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:none;-webkit-user-drag:none;pointer-events:none}
+
+#viewport{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(1200px 700px at 20% 10%,#FCEBB1 0,transparent 60%),radial-gradient(900px 700px at 90% 90%,#D9C8FA 0,transparent 60%),#F3EDFB}
+#phone{width:calc(390px*var(--scale));height:calc(844px*var(--scale));position:relative;border-radius:calc(44px*var(--scale));
+  box-shadow:0 0 0 calc(10px*var(--scale)) #1d1b22,0 30px 80px rgba(70,40,120,.35);overflow:hidden;background:#fff}
+#stage{width:390px;height:844px;position:absolute;left:0;top:0;transform:scale(var(--scale));transform-origin:0 0;overflow:hidden;background:#fff;touch-action:none}
+#hint{margin-top:calc(22px*var(--scale));font-size:12px;color:#8a7fa3;letter-spacing:.2px}
+@media (max-width:520px){
+  #phone{border-radius:0;box-shadow:none}
+  #hint{display:none}
+}
+
+/* ---------- screens ---------- */
+.screen{position:absolute;inset:0;overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s ease,transform .45s ease,visibility 0s .45s;transform:scale(1.025)}
+.screen.active{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:opacity .45s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.screen.leaving{transform:scale(.97)}
+.screen > *{position:absolute}
+
+/* backgrounds */
+.s1{background:
+  radial-gradient(260px 220px at 20% 4%,#FBE49A 0,rgba(251,228,154,0) 100%),
+  radial-gradient(300px 280px at 100% 8%,#CFE3FB 0,rgba(207,227,251,0) 100%),
+  radial-gradient(320px 260px at 0% 78%,#CFE2FB 0,rgba(207,226,251,0) 100%),
+  radial-gradient(380px 300px at 100% 96%,#E7CFFB 0,rgba(231,207,251,0) 100%),
+  linear-gradient(180deg,#FFF3C9 0%,#fff 38%,#F6F0FF 70%,#EBDDFB 100%)}
+.s2{background:
+  radial-gradient(420px 260px at 0% 0%,#FBE8A5 0,rgba(251,232,165,0) 100%),
+  radial-gradient(360px 300px at 100% 40%,#EBD9FB 0,rgba(235,217,251,0) 100%),
+  radial-gradient(420px 320px at 0% 100%,#E9D9FB 0,rgba(233,217,251,0) 100%),
+  linear-gradient(180deg,#FCEFC0 0%,#F6EEF8 36%,#EBDDFB 100%)}
+.s3{background:
+  radial-gradient(400px 300px at 0% 12%,#E8D3FB 0,rgba(232,211,251,0) 100%),
+  radial-gradient(420px 360px at 100% 55%,#DCEBFB 0,rgba(220,235,251,0) 100%),
+  radial-gradient(420px 260px at 100% 100%,#FCF0D4 0,rgba(252,240,212,0) 100%),
+  linear-gradient(180deg,#EBDCFB 0%,#F2EEFC 45%,#FBF4E3 100%)}
+.s4{background:
+  radial-gradient(420px 300px at 0% 0%,#E9D6FB 0,rgba(233,214,251,0) 100%),
+  radial-gradient(420px 340px at 50% 70%,#DCE0FB 0,rgba(220,224,251,0) 100%),
+  linear-gradient(180deg,#EAD8FB 0%,#EDEBFC 52%,#F6F7FE 100%)}
+.s5{background:
+  radial-gradient(360px 420px at 110% 70%,rgba(255,181,138,.55) 0,rgba(255,181,138,0) 100%),
+  radial-gradient(420px 260px at 0% 0%,#FBE8A5 0,rgba(251,232,165,0) 100%),
+  linear-gradient(180deg,#FCEFC4 0%,#FDF3D8 50%,#FEF8EA 100%)}
+.s6{background:
+  radial-gradient(420px 260px at 0% 0%,#FBE9AA 0,rgba(251,233,170,0) 100%),
+  radial-gradient(420px 300px at 100% 40%,#EBDAFB 0,rgba(235,218,251,0) 100%),
+  linear-gradient(180deg,#FCEFC4 0%,#F3E8F9 42%,#EDDDFB 100%)}
+.s7{background:
+  radial-gradient(360px 300px at 0% 4%,rgba(255,200,160,.7) 0,rgba(255,200,160,0) 100%),
+  radial-gradient(380px 380px at 0% 70%,#EBDAFB 0,rgba(235,218,251,0) 100%),
+  radial-gradient(400px 340px at 100% 100%,#FDF1CC 0,rgba(253,241,204,0) 100%),
+  linear-gradient(180deg,#F9E3D8 0%,#F3E7F8 40%,#FDF6DD 100%)}
+.s8{background:
+  radial-gradient(360px 300px at 0% 6%,rgba(255,200,160,.7) 0,rgba(255,200,160,0) 100%),
+  radial-gradient(420px 380px at 100% 100%,#EBDAFB 0,rgba(235,218,251,0) 100%),
+  linear-gradient(180deg,#FDEBD0 0%,#FFFBF6 36%,#F2E8FB 100%)}
+.s9{background:
+  radial-gradient(420px 300px at 0% 0%,#EBDCFB 0,rgba(235,220,251,0) 100%),
+  radial-gradient(300px 240px at 0% 46%,#DFEBFB 0,rgba(223,235,251,0) 100%),
+  linear-gradient(180deg,#EDE0FB 0%,#F4F0FD 45%,#EDE3FA 100%)}
+.s10{background:
+  radial-gradient(420px 260px at 0% 0%,#FFE4CA 0,rgba(255,228,202,0) 100%),
+  radial-gradient(360px 300px at 100% 30%,#E8D8FB 0,rgba(232,216,251,0) 100%),
+  linear-gradient(180deg,#FFF0E2 0%,#EFE3FB 40%,#F7F2FD 100%)}
+.s11{background:#fff}
+.s12{background:#FCEBB1}
+
+/* ---------- chrome ---------- */
+#chrome{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;z-index:20}
+#chrome.on{opacity:1}
+.statusbar{position:absolute;left:0;top:0;width:390px;height:54px;z-index:21}
+.statusbar .time{position:absolute;left:0;width:140.5px;top:18px;text-align:center;font:600 17px/22px -apple-system,'SF Pro',system-ui,sans-serif;color:#000}
+.statusbar img{position:absolute;right:0;top:0;width:140.5px;height:54px}
+.sb-plain{opacity:0;transition:opacity .3s;pointer-events:none;z-index:21}
+.sb-plain.on{opacity:1}
+.progress{position:absolute;left:12px;top:60px;width:366px;height:3px;display:flex;gap:6px}
+.progress i{flex:1;height:3px;border-radius:3px;background:rgba(67,67,67,.2);overflow:hidden;position:relative}
+.progress i b{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.progress i.done b{transform:scaleX(1)}
+.progress i.cur b{animation:fill .7s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.hdr{position:absolute;left:0;top:76px;width:390px;height:48px}
+.hdr-logo{position:absolute;left:20px;top:2px;width:69px;height:44px}
+.exit{position:absolute;right:16px;top:12px;width:24px;height:24px;pointer-events:auto;transition:transform .2s}
+.exit:active{transform:scale(.85) rotate(90deg)}
+.exit img{width:24px;height:24px}
+.pill{position:absolute;left:50%;top:135px;transform:translateX(-50%) rotate(-1.5deg);height:34px;padding:0 18px;border-radius:20px 22px 18px 24px;
+  background:linear-gradient(180deg,#FBE591,#F8DA6F);display:flex;align-items:center;gap:5px;font:700 16.5px/34px 'Poppins';color:var(--ink);white-space:nowrap;box-shadow:0 3px 8px rgba(247,205,61,.35)}
+.pill .sp{font-size:14px;transform:translateY(-1px)}
+.pill.wide{transform:translateX(-50%) rotate(-4deg);padding:0 20px;font-size:16px}
+.pill.pop-in{animation:pillIn .6s cubic-bezier(.2,1.4,.4,1) both .05s}
+@keyframes pillIn{from{opacity:0;transform:translateX(-50%) translateY(10px) scale(.7) rotate(-6deg)}to{opacity:1}}
+.btn-share{position:absolute;left:95px;top:726px;width:200px;height:48px;border-radius:12px;background:#fff;box-shadow:0 4px 8.5px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;gap:4px;
+  font:700 16px/22px 'DM Sans';color:var(--ink);pointer-events:auto;z-index:22;transition:transform .15s}
+.btn-share img{width:20px;height:20px}
+.btn-share:active{transform:scale(.95)}
+.story-share{opacity:0;transform:translateY(16px);transition:opacity .4s .3s,transform .5s .3s cubic-bezier(.2,1.2,.3,1)}
+#chrome .story-share,#chrome .exit{pointer-events:none}
+#chrome.on .story-share,#chrome.on .exit{pointer-events:auto}
+#chrome.on .story-share{opacity:1;transform:none}
+
+/* ---------- shared text ---------- */
+.title{font:800 41px/50px 'Poppins';text-align:center;color:var(--ink);letter-spacing:0}
+.stat{position:absolute;left:0;width:390px;text-align:center}
+.num{font:700 100px/46px 'Poppins';letter-spacing:-3px;text-align:center;display:flex;align-items:center;justify-content:center;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;
+  overflow:visible}
+.num span{display:inline-block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.5;padding:0 .12em .08em;margin:0 -.12em;white-space:nowrap}
+.h91{height:91px}.h82{height:82px}.h77{height:77px}
+.cap{font:500 24px/38px 'DM Sans';color:var(--ink80);text-align:center;font-variation-settings:'opsz' 14}
+.cap26{font-size:26px}
+.badge{display:inline-block;padding:4px 12px;border-radius:6px;font:700 16px/22px 'DM Sans';color:var(--ink);white-space:nowrap;
+  background:linear-gradient(193deg,#E0B161 18%,#FFECC5 56%,#E0B161 99%);position:relative;overflow:hidden}
+.badge::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent);animation:shine 3.2s ease-in-out infinite 1.2s}
+@keyframes shine{0%{left:-60%}35%,100%{left:130%}}
+.stat .badge{margin-top:16px}
+.star{position:absolute}
+.shadow-blob{position:absolute;opacity:.9}
+
+/* ---------- entrance + ambient animation ---------- */
+.screen .pop,.screen .rise,.screen .drop{opacity:0}
+.screen.active .pop{animation:pop .7s cubic-bezier(.2,1.3,.4,1) both;animation-delay:var(--d,0s)}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.86)}to{opacity:1;transform:none}}
+.screen.active .rise{animation:rise .8s cubic-bezier(.2,1.1,.3,1) both;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(60px) rotate(2deg) scale(.92)}to{opacity:1;transform:none}}
+.twinkle{animation:twinkle 2.6s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes twinkle{0%,100%{transform:scale(.7) rotate(0);opacity:.5}50%{transform:scale(1.2) rotate(30deg);opacity:1}}
+.yellow{filter:sepia(1) saturate(6) hue-rotate(-12deg) brightness(1.05)}
+.bob{animation:bob 3.4s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -9px}}
+.float{animation:floatR 6s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes floatR{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.float-slow{animation:floatS 7s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes floatS{0%,100%{translate:0 0}50%{translate:4px -7px}}
+.bounce{animation:bounce 1.6s cubic-bezier(.3,0,.4,1) infinite;animation-delay:var(--d,0s)}
+@keyframes bounce{0%,100%{translate:0 0;rotate:0deg}30%{translate:0 -14px;rotate:-4deg}60%{translate:0 0;rotate:3deg}}
+.flipx{transform:scaleX(-1)}
+.breathe img{animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+.wiggle{animation:wiggle 3.2s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes wiggle{0%,100%{translate:0 0;rotate:-2deg}50%{translate:0 -6px;rotate:2deg}}
+.mascot-png{position:absolute}
+.mascot{position:absolute;border-radius:50%;overflow:hidden;box-shadow:0 10px 30px rgba(170,130,240,.35)}
+.mascot img,.crop img,.photo img{position:absolute}
+.crop{position:absolute;overflow:hidden}
+
+/* ---------- S1 cover ---------- */
+.burst{position:absolute;overflow:visible;animation:burstPulse 3s ease-in-out infinite}
+.burst.b-b{animation-delay:-1s}.burst.b-c{animation-delay:-2s}
+@keyframes burstPulse{0%,100%{transform:scale(.9);opacity:.55}50%{transform:scale(1.08);opacity:1}}
+.polaroid{position:absolute;border-radius:16px;background:rgba(255,255,255,.35);border:2px solid rgba(255,255,255,.75);box-shadow:0 8px 24px rgba(190,170,220,.35);
+  transform:rotate(var(--rot,0));}
+.polaroid .photo{position:absolute;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.s1.active .polaroid.dog{animation:slideL .9s cubic-bezier(.2,1.1,.3,1) both,floatR 6s ease-in-out 1s infinite}
+.s1.active .polaroid.cat{animation:slideR .9s cubic-bezier(.2,1.1,.3,1) .12s both,floatR 6s ease-in-out 1.1s infinite}
+@keyframes slideL{from{opacity:0;transform:translateX(-120px) rotate(-14deg)}to{opacity:1;transform:rotate(var(--rot))}}
+@keyframes slideR{from{opacity:0;transform:translateX(120px) rotate(14deg)}to{opacity:1;transform:rotate(var(--rot))}}
+.logo-cover{left:44px;top:70px;width:94px;transform:rotate(-5deg);z-index:2}
+.cover-names{left:27px;top:404px;width:210px;text-align:center;font:700 24px/29px 'Poppins';white-space:nowrap;transform:rotate(-4deg);color:var(--ink)}
+.cover-year{left:23px;top:441px;width:227px;text-align:center;font:900 90px/90px 'Poppins';white-space:nowrap;transform:rotate(-3.56deg);background:linear-gradient(148deg,#9B75FB 1.4%,#5197D8 99.9%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover-wrapped{left:33px;top:528px;width:190px;text-align:center;font:800 40px/48px 'Poppins';white-space:nowrap;transform:rotate(-3.56deg);background:linear-gradient(162deg,#DFB2FF 1.4%,#5197D8 82%,#329CFF 99.9%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.s1.active .cover-names,.s1.active .cover-year,.s1.active .cover-wrapped{animation-name:popTilt}
+@keyframes popTilt{from{opacity:0;translate:0 24px;scale:.85}to{opacity:1;translate:0 0;scale:1}}
+.cover-sub{left:44px;top:635px;width:301px;text-align:center;font:500 16px/26px 'Poppins';opacity:.9}
+.s1.active .cover-sub{animation-name:popFade}
+@keyframes popFade{from{opacity:0;translate:0 14px}to{opacity:.9;translate:0 0}}
+.cta{position:absolute;left:30px;top:726px;width:330px;height:48px;border-radius:12px;font:700 16px/22px 'DM Sans';color:var(--ink);overflow:hidden;transition:transform .15s,box-shadow .2s}
+.cta-yellow{background:var(--yellow);box-shadow:0 6px 16px rgba(247,205,61,.45)}
+.cta:active{transform:scale(.96)}
+.cta-yellow::after{content:"";position:absolute;top:0;bottom:0;width:30%;left:-50%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);animation:shine 3s ease-in-out infinite 1.5s}
+.s1.active .cta{animation:ctaIn .7s cubic-bezier(.2,1.3,.4,1) 1.05s both}
+@keyframes ctaIn{from{opacity:0;translate:0 30px}to{opacity:1;translate:0 0}}
+
+/* ---------- S2 ---------- */
+.glass-ring{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.65) 0,rgba(255,255,255,.35) 62%,rgba(255,255,255,.12) 100%);
+  border:2.5px solid rgba(255,255,255,.75);box-shadow:0 0 50px rgba(255,255,255,.8),inset 0 0 40px rgba(255,255,255,.6)}
+.ring-img{left:45.3px;top:234.5px;width:334px;height:339px;transform-origin:44.8% 54.5%}
+.s2.active .ring-img{animation:ringPulse 4s ease-in-out infinite}
+.s8.active .glass-ring{animation:ringPulse 4s ease-in-out infinite}
+@keyframes ringPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.calendar{left:-57px;top:445px;width:297px;height:220px;opacity:.65}
+.paw-glow{left:62px;top:560px;width:34px;height:34px;border-radius:12px;background:rgba(247,205,61,.0)}
+.s2.active .paw-glow{animation:pawGlow 2.2s ease-in-out infinite .8s}
+@keyframes pawGlow{0%,100%{box-shadow:0 0 0 0 rgba(247,205,61,0);background:rgba(247,205,61,0)}50%{box-shadow:0 0 28px 12px rgba(247,205,61,.65);background:rgba(247,205,61,.25)}}
+
+/* ---------- S3 ---------- */
+.card3.a{transform:rotate(var(--rot))}
+.mascot-wrap{position:absolute}
+.flash{position:absolute;left:112px;top:92px;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,255,255,.9) 30%,rgba(255,255,255,0) 70%);opacity:0;transform:scale(.2)}
+.s3.active .flash{animation:flash 3.2s ease-out infinite 1.1s}
+@keyframes flash{0%{opacity:0;transform:scale(.2)}5%{opacity:1;transform:scale(2.6)}20%,100%{opacity:0;transform:scale(3.6)}}
+.s3.active .card3.b{animation:floatS 7s ease-in-out infinite -1.8s,camShot 3.2s ease-out infinite 1.1s}
+@keyframes camShot{0%,3%{filter:brightness(1)}6%{filter:brightness(1.35)}20%,100%{filter:brightness(1)}}
+
+/* ---------- S4 ---------- */
+.cloud-bubble{position:absolute}
+.note,.note-big{position:absolute;overflow:hidden}
+.note img,.note-big img{position:absolute}
+.note-big{animation:noteFloat 3.4s ease-in-out infinite}
+.note-big.n2{animation-delay:-1s}.note-big.n3{animation-delay:-2s}
+@keyframes noteFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(6deg)}}
+.note{animation:noteFloat 4.2s ease-in-out infinite}
+
+/* ---------- S5 ---------- */
+.dog-round{left:103.5px;top:300.5px;width:180px;height:180px;border-radius:50%}
+.s5.active .dog-round{animation:pop .7s cubic-bezier(.2,1.5,.4,1) .25s both,dogBob 3.6s ease-in-out 1s infinite}
+@keyframes dogBob{0%,100%{translate:0 0;rotate:-1deg}50%{translate:0 -6px;rotate:1deg}}
+.chip{position:absolute}
+.chipL{width:90px;height:67px;left:56px;top:301px!important;left:56px!important;transform:rotate(0)}
+.chipR{width:109px;height:82px;left:243px!important;top:405px!important}
+.chip > img{position:absolute;inset:0;width:100%;height:100%}
+.chipL{transform:scaleY(-1) rotate(-8.6deg)}
+.chipL .eq{transform:scaleY(-1)}
+.chipR{transform:rotate(-171.9deg) scaleY(1)}
+.chipR .eq{transform:rotate(171.9deg)}
+.eq{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:3px;padding:0 14px 8px}
+.eq i{display:block;width:3px;border-radius:2px;background:linear-gradient(180deg,#FFA55B,#F7B64B);animation:eq 1s ease-in-out infinite;height:8px}
+.eq i:nth-child(odd){animation-duration:.8s}.eq i:nth-child(3n){animation-duration:1.15s}
+.eq i:nth-child(1){animation-delay:-.1s}.eq i:nth-child(2){animation-delay:-.4s}.eq i:nth-child(3){animation-delay:-.7s}.eq i:nth-child(4){animation-delay:-.2s}.eq i:nth-child(5){animation-delay:-.55s}.eq i:nth-child(6){animation-delay:-.3s}.eq i:nth-child(7){animation-delay:-.8s}.eq i:nth-child(8){animation-delay:-.15s}.eq i:nth-child(9){animation-delay:-.6s}.eq i:nth-child(10){animation-delay:-.35s}.eq i:nth-child(11){animation-delay:-.5s}.eq i:nth-child(12){animation-delay:-.25s}
+@keyframes eq{0%,100%{height:6px}50%{height:26px}}
+
+/* ---------- S6 ---------- */
+.trail{left:0;top:0;pointer-events:none}
+.day-card{left:41px;top:332px;width:295px;height:325px;border-radius:28px;background:#fff;box-shadow:0 16px 40px rgba(180,150,230,.3)}
+.photo-d{position:absolute;left:15px;top:19.5px;width:265px;height:177px;border-radius:18.6px;overflow:hidden}
+.photo-d img{position:absolute}
+.num-d{position:absolute;left:0;right:0;top:215px;height:52px;display:flex;align-items:center;justify-content:center}
+.num-d span{font:700 63px/1.5 'Poppins';padding:0 .12em .08em;background:linear-gradient(166deg,#9B75FB 1.4%,#5197D8 99.9%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:4px}
+.cap-d{position:absolute;left:0;right:0;top:272px;text-align:center;font:500 24px/35px 'DM Sans';color:var(--ink80)}
+.paw{position:absolute;opacity:0}
+.paw img{width:100%}
+.paw.p1{left:274px;top:664px;width:54px;transform:rotate(-8deg)}
+.paw.p2{left:334px;top:640px;width:40px;transform:rotate(14deg)}
+.s6.active .paw.p1{animation:stamp .5s cubic-bezier(.2,1.6,.4,1) 1.0s both}
+.s6.active .paw.p2{animation:stamp .5s cubic-bezier(.2,1.6,.4,1) 1.25s both}
+@keyframes stamp{from{opacity:0;scale:2.2}to{opacity:1;scale:1}}
+.s6.active .day-card{animation:rise .8s cubic-bezier(.2,1.1,.3,1) .25s both,cardSway 6s ease-in-out 1.2s infinite}
+@keyframes cardSway{0%,100%{rotate:-.6deg}50%{rotate:.6deg}}
+
+/* ---------- S7 ---------- */
+.spot{left:-60px;top:-60px;width:520px;height:520px;background:conic-gradient(from 160deg at 0% 0%,rgba(255,255,255,0) 0deg,rgba(255,255,255,.55) 20deg,rgba(255,255,255,0) 40deg);opacity:.8;transform-origin:0 0;animation:spotSweep 6s ease-in-out infinite}
+@keyframes spotSweep{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(8deg)}}
+.selfie{position:absolute;border-radius:14px;background:rgba(255,255,255,.55);border:3px solid rgba(255,255,255,.9);box-shadow:0 10px 24px rgba(170,140,220,.35);transform:rotate(var(--rot));opacity:0}
+.selfie .photo{position:absolute;overflow:hidden}
+.s7.active .selfie{animation:dropIn .8s cubic-bezier(.2,1.4,.4,1) both;animation-delay:var(--d)}
+@keyframes dropIn{from{opacity:0;transform:translateY(-70px) rotate(calc(var(--rot) * 3)) scale(.9)}to{opacity:1;transform:rotate(var(--rot))}}
+.crown{position:absolute;opacity:0;z-index:3}
+.s7.active .crown{animation:crownDrop .75s cubic-bezier(.2,1.8,.4,1) both;animation-delay:var(--d)}
+@keyframes crownDrop{from{opacity:0;transform:translateY(-50px) rotate(-25deg) scale(1.4)}to{opacity:1;transform:none}}
+
+/* ---------- S8 ---------- */
+.phone-img{left:-102px;top:406px;width:297px;height:318px;opacity:.85}
+.app-icon{position:absolute;left:14px;top:546px;width:72px;height:72px;border-radius:14px;background:#F7CD3D;transform:rotate(-13deg);box-shadow:0 0 0 8px rgba(255,255,255,.55),0 8px 20px rgba(240,190,40,.4);display:flex;align-items:center;justify-content:center}
+.app-icon img{width:52px}
+.check-bub{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),rgba(255,255,255,.55));box-shadow:0 6px 20px rgba(180,150,230,.3),inset 0 0 14px rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0)}
+.check-bub img{width:80%;height:auto}
+.s8.active .check-bub{animation:bubPop .6s cubic-bezier(.2,1.7,.4,1) both,bubFloat 4s ease-in-out infinite}
+.s8.active .c1{animation-delay:.7s,1.3s}.s8.active .c2{animation-delay:1s,1.6s}.s8.active .c3{animation-delay:1.3s,1.9s}
+.c2{opacity:.8!important}.c3{opacity:.65!important}
+@keyframes bubPop{from{opacity:0;transform:scale(0) rotate(-30deg)}to{opacity:1;transform:scale(1)}}
+@keyframes bubFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+
+/* ---------- S9 ---------- */
+.ghost{position:absolute;opacity:.9}
+.bubble-card,.bubble-cloud10,.cloud-bubble{position:absolute}
+.bubble-card{rotate:-171.88deg}
+.mascot-glow{position:absolute;border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(255,255,255,.95),rgba(235,215,255,.7) 60%,rgba(190,170,255,.4));box-shadow:0 8px 24px rgba(180,150,230,.4)}
+.chat-bubble{position:absolute;width:167px;height:127px}
+.chat-bubble img{width:100%;height:100%}
+.typing{position:absolute;left:34px;top:34px;display:flex;gap:9px}
+.typing i{width:11px;height:11px;border-radius:50%;background:#fff;animation:dot 1.1s ease-in-out infinite}
+.typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
+@keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.7}30%{transform:translateY(-7px);opacity:1}}
+.chat-bubble{transform-origin:20% 90%}
+
+/* ---------- S10 ---------- */
+.pulse-wave{animation:waveP 2s ease-in-out infinite;animation-delay:var(--d,0s);transform-origin:center}
+@keyframes waveP{0%,100%{transform:scaleY(.75);opacity:.55}50%{transform:scaleY(1.1);opacity:1}}
+.device{position:absolute;width:118px;height:170px;overflow:hidden;transform:rotate(-7deg)}
+.device img{position:absolute;width:384px;height:256px;left:-54px;top:-41px}
+.treat{position:absolute;width:384px;height:256px;opacity:0;pointer-events:none;clip-path:inset(0)}
+.treat{width:23px;height:23px;object-fit:none;border-radius:50%}
+.treat.t1{object-position:-155px -151px}
+.treat.t2{object-position:-229px -125px}
+.treat.t3{object-position:-340px -95px}
+.s10.active .treat{animation:toss 2.4s cubic-bezier(.3,.6,.4,1) infinite}
+.treat.t1{left:150px;top:640px;--dx:30px;--dy:-30px}
+.treat.t2{left:150px;top:640px;--dx:90px;--dy:-80px}
+.treat.t3{left:150px;top:640px;--dx:160px;--dy:-130px}
+.s10.active .t1{animation-delay:.8s}.s10.active .t2{animation-delay:1s}.s10.active .t3{animation-delay:1.2s}
+@keyframes toss{0%{opacity:0;transform:translate(0,0) scale(.6)}8%{opacity:1}55%{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(180deg)}75%,100%{opacity:0;transform:translate(calc(var(--dx)*1.3),calc(var(--dy)*.4)) scale(.8) rotate(300deg)}}
+.heart-bub{position:absolute}
+
+/* ---------- S11 ---------- */
+.reveal-bg{left:-25px;top:-32px;width:439px;height:878px}
+.reveal-avatar{left:258px;top:362px;width:166px;height:166px;transform:rotate(10deg)}
+.reveal-avatar .ring{position:absolute;inset:0;border-radius:50%;border:5px solid #fff;overflow:hidden;box-shadow:0 10px 28px rgba(150,130,240,.4)}
+.reveal-avatar .ring img{position:absolute}
+.swipe{position:absolute;left:107px;top:688px;width:173px;display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:auto}
+.swipe-circle{width:60px;height:60px;border-radius:50%;display:block;filter:drop-shadow(0 5px 5px rgba(0,0,0,.2));animation:swipeUp 1.6s ease-in-out infinite}
+.swipe-circle img{width:60px;height:60px;transform:rotate(-90deg)}
+.swipe-label{font:500 20px/28px 'Poppins';color:var(--ink80);white-space:nowrap}
+@keyframes swipeUp{0%,100%{transform:translateY(0)}45%{transform:translateY(-14px)}}
+.reveal-glow{left:50%;top:380px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#fff;opacity:0;pointer-events:none}
+.s11.revealing .reveal-glow{animation:glowBurst .9s ease-out forwards}
+@keyframes glowBurst{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(160)}}
+.s11.revealing .reveal-bg{animation:cardShake .55s ease-in-out}
+@keyframes cardShake{0%,100%{transform:none}20%{transform:translateX(-6px) rotate(-1deg)}40%{transform:translateX(6px) rotate(1deg)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.s11.revealing .reveal-avatar{animation:avZoom .9s ease-in forwards}
+@keyframes avZoom{to{transform:rotate(10deg) scale(1.35) translate(-30px,-50px)}}
+
+/* ---------- S12 ---------- */
+.result-bg{left:-6px;top:0;width:396px;height:855px;object-fit:cover}
+.logo12{left:150px;top:87px;width:95px}
+.result-card{left:43px;top:200px;width:300px;height:400px;perspective:900px;pointer-events:none;transform-style:preserve-3d}
+.result-card p{position:absolute;left:0;right:0;text-align:center}
+.r-pre{top:116px;font:700 22.3px/30px 'DM Sans';color:var(--ink90)}
+.r-title{top:150px;font:700 44.7px/48.7px 'Poppins';background:linear-gradient(93deg,#5170D7 13%,#2E4FC0 38%,#5170D7 59%,#2E4FC0 88%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.r-tags{top:305px;font:500 19.3px/28px 'Poppins';color:var(--ink90)}
+.s12 .result-card > *{opacity:0}
+.s12.active .r-pre{animation:pop .7s cubic-bezier(.2,1.3,.4,1) .35s both}
+.s12.active .r-title{animation:titleReveal 1s cubic-bezier(.2,1.4,.4,1) .55s both}
+.s12.active .r-tags{animation:pop .7s cubic-bezier(.2,1.3,.4,1) .95s both}
+@keyframes titleReveal{from{opacity:0;transform:scale(.4) rotate(-6deg);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+.r-mascot{left:261px;top:153px;width:146px;z-index:2}
+.s12.active .r-mascot{animation:mascotPop .9s cubic-bezier(.2,1.6,.4,1) .2s both,bob 3.4s ease-in-out 1.2s infinite}
+@keyframes mascotPop{from{opacity:0;transform:scale(.2) rotate(-40deg)}to{opacity:1;transform:none}}
+.s12 .btn-share,.s12 .btn-replay{opacity:0}
+.s12.active .btn-share{animation:pop .7s cubic-bezier(.2,1.3,.4,1) 1.2s both,sharePulse 2.4s ease-in-out 2.2s infinite;box-shadow:none}
+@keyframes sharePulse{0%,100%{box-shadow:0 0 0 0 rgba(155,117,251,.0)}50%{box-shadow:0 0 0 8px rgba(155,117,251,.18)}}
+.btn-replay{position:absolute;left:0;width:390px;top:735px;justify-content:center;display:flex;align-items:center;gap:7px;font:700 16px/22px 'DM Sans';color:var(--ink);pointer-events:auto;z-index:22;padding:4px 10px}
+.s12.active .btn-replay{animation:pop .7s ease 1.4s both}
+.s12 .btn-share{top:663px}
+.s12 .btn-share,.s12 .btn-replay{z-index:5}
+
+/* ---------- tap fx + confetti ---------- */
+#tapfx{position:absolute;inset:0;pointer-events:none;z-index:40}
+.spark{position:absolute;width:10px;height:10px;margin:-5px;pointer-events:none;animation:sparkOut .7s ease-out forwards}
+.spark::before{content:"✦";position:absolute;inset:0;line-height:10px;font-size:12px;text-align:center;color:var(--c,#F7CD3D)}
+@keyframes sparkOut{to{transform:translate(var(--x),var(--y)) scale(.2) rotate(180deg);opacity:0}}
+#confetti{position:absolute;inset:0;pointer-events:none;z-index:45}
+
+/* ---------- share sheet ---------- */
+.sheet{position:absolute;inset:0;z-index:60;visibility:hidden}
+.sheet.open{visibility:visible}
+.sheet-backdrop{position:absolute;inset:0;background:rgba(40,25,70,.35);opacity:0;transition:opacity .3s;backdrop-filter:blur(3px)}
+.sheet.open .sheet-backdrop{opacity:1}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:10px 20px 34px;transform:translateY(105%);transition:transform .45s cubic-bezier(.2,1,.3,1)}
+.sheet.open .sheet-panel{transform:none}
+.sheet-grab{width:40px;height:4px;border-radius:2px;background:#DDD;margin:0 auto 16px}
+.sheet-preview{height:120px;border-radius:16px;background:linear-gradient(135deg,#FCEBB1,#E7D7FB 55%,#BCD8FB);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.sheet-preview img{width:70px}
+.sheet-preview p{font:700 17px/22px 'Poppins';color:var(--ink)}
+.sheet-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0 12px}
+.sheet-row button{display:flex;flex-direction:column;align-items:center;gap:8px;font:500 12px 'DM Sans';color:var(--ink80);transition:transform .15s}
+.sheet-row button:active{transform:scale(.92)}
+.ic{width:52px;height:52px;border-radius:16px;display:block;background-size:26px;background-repeat:no-repeat;background-position:center}
+.ic.ig{background-color:#F7CD3D;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='none' stroke='%23434343' stroke-width='2.2' stroke-linecap='round'%3E%3Crect x='3' y='3' width='20' height='20' rx='6'/%3E%3Ccircle cx='13' cy='13' r='4.5'/%3E%3Ccircle cx='18.5' cy='7.5' r='.6' fill='%23434343'/%3E%3C/svg%3E")}
+.ic.sv{background-color:#E7D7FB;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='none' stroke='%23434343' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 4v13M7.5 12l5.5 5.5L18.500 12M5 21h16'/%3E%3C/svg%3E")}
+.ic.cp{background-color:#BCD8FB;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='none' stroke='%23434343' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 15a4 4 0 0 0 5.700 0l3-3a4 4 0 0 0-5.700-5.700l-1 1M15 11a4 4 0 0 0-5.700 0l-3 3a4 4 0 0 0 5.700 5.700l1-1'/%3E%3C/svg%3E")}
+.ic.mr{background-color:#F1F1F1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='%23434343'%3E%3Ccircle cx='5' cy='13' r='2.200'/%3E%3Ccircle cx='13' cy='13' r='2.200'/%3E%3Ccircle cx='21' cy='13' r='2.200'/%3E%3C/svg%3E")}
+.sheet-cancel{width:100%;height:48px;border-radius:12px;background:#F4F1F8;font:700 16px 'DM Sans';color:var(--ink)}
+#toast{position:absolute;left:50%;bottom:110px;transform:translate(-50%,20px);background:rgba(40,30,60,.92);color:#fff;font:500 14px/20px 'DM Sans';padding:10px 18px;border-radius:20px;opacity:0;transition:.35s;z-index:70;white-space:nowrap;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+.nt{position:absolute;background-image:url(img/nanny_notes.png);background-repeat:no-repeat;filter:drop-shadow(0 4px 6px rgba(140,110,230,.25))}
+.nt.nb{animation:noteFloat 3.4s ease-in-out infinite}.nt.n2{animation-delay:-1s}.nt.n3{animation-delay:-2s}
+.nt.ns1,.nt.ns2{animation:noteFloat 4.2s ease-in-out infinite}
+
+/* pill images */
+.pill-img{position:absolute;left:50%;top:120px;transform:translateX(-50%);pointer-events:none}
+.pill-img[data-k="pill3"]{top:120px;width:205px;height:66px}
+.pill-img[data-k="5-pill"]{top:122px;width:241px;height:48px}
+.pill-img[data-k="8-pill"]{top:126px;width:148px;height:51px}
+.pill-img.pop-in{animation:pillImgIn .6s cubic-bezier(.2,1.4,.4,1) both .05s}
+@keyframes pillImgIn{from{opacity:0;transform:translateX(-50%) translateY(10px) scale(.7)}to{opacity:1;transform:translateX(-50%)}}
+
+.note-img{position:absolute;filter:drop-shadow(0 4px 6px rgba(140,110,230,.25))}
+.note-img.nb{animation:noteFloat 3.4s ease-in-out infinite}
+.note-img.n2{animation-delay:-1s}.note-img.n3{animation-delay:-2s}
+.note-img.ns1,.note-img.ns2{animation:noteFloat 4.2s ease-in-out infinite}
+
+/* page 5 chips: bubble + waveform images */
+.s5 .chip{transform:none!important}
+.s5 .chipL{left:56px!important;top:305px!important;width:100px;height:74px;rotate:-6deg}
+.s5 .chipR{left:244px!important;top:420px!important;width:116px;height:86px;rotate:176deg}
+.s5 .chip .bub{position:absolute;inset:0;width:100%;height:100%}
+.s5 .chip .wf{position:absolute;left:50%;top:44%;width:66%;height:auto;transform:translate(-50%,-50%);animation:wfPulse 1.1s ease-in-out infinite;transform-origin:center}
+@keyframes wfPulse{0%,100%{transform:translate(-50%,-50%) scaleY(.7)}50%{transform:translate(-50%,-50%) scaleY(1.15)}}
+
+.s5 .chip{z-index:3;animation:chipFloat 3.2s ease-in-out infinite}
+.s5 .chipR{animation-delay:-1.1s}
+@keyframes chipFloat{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.s5 .chip .wf{width:74%}
+
+.s5 .chipR .wf{animation-name:wfPulseR}
+@keyframes wfPulseR{0%,100%{transform:translate(-50%,-50%) rotate(-176deg) scaleY(.7)}50%{transform:translate(-50%,-50%) rotate(-176deg) scaleY(1.15)}}
+
+/* ---- exact Figma backgrounds ---- */
+.s1,.s2,.s3,.s4,.s5,.s6,.s7,.s8,.s9,.s10,.s11{background:#fff!important}
+.bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.bgo{position:absolute;display:flex;align-items:center;justify-content:center}
+.bgi{flex:none;position:relative}
+.bgi img{position:absolute;max-width:none;display:block}
+.bgi img:only-child:not([style*="%"]){}
+
+/* page 6: dotted trail 'walks' in step by step, like paw steps */
+.walk{clip-path:inset(-30% 100% -30% 0)}
+.s6.active .walk{animation:walkTrail 4.2s infinite}
+.s6.active .walk.w2{animation-delay:.5s}
+@keyframes walkTrail{
+  0%{clip-path:inset(-30% 100% -30% 0);opacity:1;animation-timing-function:steps(34,end)}
+  78%{clip-path:inset(-30% 0 -30% 0);opacity:1;animation-timing-function:ease}
+  92%{clip-path:inset(-30% 0 -30% 0);opacity:1}
+  100%{clip-path:inset(-30% 0 -30% 0);opacity:0}
+}
+
+/* page 7: the two spotlights sweep and breathe from the top-left corner */
+.spot1{transform-origin:85.74px 87.09px}
+.spot2{transform-origin:170px -85px}
+.s7.active .spot1{animation:spotA 3.4s ease-in-out infinite}
+.s7.active .spot2{animation:spotB 4.4s ease-in-out infinite -1s}
+@keyframes spotA{0%,100%{rotate:-3deg;opacity:.7}50%{rotate:3.5deg;opacity:1}}
+@keyframes spotB{0%,100%{rotate:3deg;opacity:1}50%{rotate:-4deg;opacity:.65}}
+
+/* page 5: sparkle stars always sit behind the dog photo and chips */
+.s5 .bg{z-index:0}
+.s5 .star{z-index:1}
+.s5 .dog-round,.s5 .chip{z-index:4}
+
+/* page 7: the white sparkle sits behind the selfie cards */
+.s7 .bg{z-index:0}
+.s7 .selfie{z-index:2}
+.s7 .crown{z-index:3}
+
+.s9 .mascot-glass{position:absolute}
+.s9 .bubble-card{rotate:-171.88deg}
+.s9 .ghost.float-slow{animation:ghostBob 7s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes ghostBob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+
+/* page 9 chat bubble: dots centred in the glass body */
+.s9 .chat-bubble .typing{left:83.5px;top:58.1px;transform:translate(-50%,-50%);gap:9px;align-items:center}
+.s9 .chat-bubble .typing i{width:15px;height:15px;background:#fff;box-shadow:0 1px 3px rgba(150,120,230,.35);animation:dot9 1.2s ease-in-out infinite}
+.s9 .chat-bubble .typing i:nth-child(2){animation-delay:.2s}
+.s9 .chat-bubble .typing i:nth-child(3){animation-delay:.4s}
+@keyframes dot9{0%,60%,100%{transform:translateY(0);opacity:.75}30%{transform:translateY(-4px);opacity:1}}
+
+/* page 6: the photo is revealed after the card lands */
+.photo-d{clip-path:inset(0 0 100% 0 round 18.6px)}
+.s6.active .photo-d{animation:photoWipe 1s cubic-bezier(.6,0,.2,1) .95s forwards}
+@keyframes photoWipe{from{clip-path:inset(0 0 100% 0 round 18.6px)}to{clip-path:inset(0 0 0 0 round 18.6px)}}
+.s6.active .photo-d img{animation:photoSettle 1.4s cubic-bezier(.2,.8,.2,1) .95s both}
+@keyframes photoSettle{from{transform:scale(1.25);filter:blur(8px) brightness(1.25) saturate(.5)}to{transform:scale(1);filter:none}}
+
+/* page 6: whole card gets a small shake, then a gentle drift */
+.s6.active .day-card{animation:rise .8s cubic-bezier(.2,1.1,.3,1) .25s both,cardShake6 3.6s ease-in-out 1.9s infinite}
+@keyframes cardShake6{
+  0%,100%{rotate:0deg;translate:0 0}
+  6%{rotate:-1.6deg;translate:-2px 0}
+  12%{rotate:1.6deg;translate:2px 0}
+  18%{rotate:-1.1deg;translate:-1px 0}
+  24%{rotate:.8deg;translate:1px 0}
+  30%{rotate:0deg;translate:0 0}
+  65%{rotate:.5deg;translate:0 -3px}
+}
+
+/* ---- odometer digits ---- */
+.num .odo{display:inline-flex;justify-content:center;background:none;color:inherit;padding:0;margin:0;line-height:1.14;letter-spacing:0;font-variant-numeric:tabular-nums;-webkit-background-clip:border-box;background-clip:border-box}
+.num .odo .d{display:inline-block;height:1.14em;overflow:hidden;width:.62em;text-align:center;position:relative}
+.num .odo .reel{display:flex;flex-direction:column;transition:transform 1.6s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--k)*90ms)}
+.num .odo .reel i{font-style:normal;display:block;height:1.14em;line-height:1.14em;background:var(--grad);background-size:var(--W,100%) 100%;background-position:var(--ox,0) 0;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent}
+.num .odo .c{display:inline-block;width:.3em;text-align:center;line-height:1.14em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;align-self:flex-start}
+.num .odo.hop .d{animation:hop .7s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--k,0)*80ms)}
+@keyframes hop{0%{transform:translateY(0) scale(1)}30%{transform:translateY(-.1em) scale(1.12,.92)}60%{transform:translateY(.02em) scale(.95,1.06)}100%{transform:none}}
+.num .odo.glow{animation:glowp 1.2s ease-in-out}
+@keyframes glowp{50%{filter:drop-shadow(0 0 18px rgba(155,117,251,.6))}}
+.num .odo span{padding:0;margin:0;white-space:normal;background:none;-webkit-background-clip:border-box;background-clip:border-box;color:inherit}
+.num .odo .c{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.num .odo .d{width:.575em}
+.num .odo .c{width:.27em}
+.num .odo{position:relative}
+.num{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:inherit!important}
+/* digits: clip only vertically (so wide glyphs like 0/8 never get cut), no glow pulse */
+.num .odo .d{overflow:visible;clip-path:inset(0 -.2em 0 -.2em)}
+.num .odo.glow{animation:none!important;filter:none!important}
+
+.num .odo .d{width:auto}
+.num .odo .c{width:.24em}
+
+/* swipe-up transition between page 11 and 12 */
+.screen.exit-up{transform:translateY(-100%)!important;opacity:1!important;visibility:visible!important;transition:transform .7s cubic-bezier(.7,0,.2,1)!important}
+.screen.enter-up{transform:translateY(100%)!important;opacity:1!important;visibility:visible!important;transition:none!important}
+.screen.sliding{transition:transform .7s cubic-bezier(.7,0,.2,1)!important}
+/* page 12: share button no longer pulses */
+.s12.active .btn-share{animation:pop .7s cubic-bezier(.2,1.3,.4,1) 1.2s both!important;box-shadow:0 4px 8.5px rgba(0,0,0,.1)}
+
+/* ---- smooth page-to-page transition: new page fades in over the old one (no dip, no scaling edges) ---- */
+.screen{transform:none;z-index:0;transition:opacity .8s cubic-bezier(.4,0,.2,1),visibility 0s .8s}
+.screen.active{transform:none;z-index:2;transition:opacity .8s cubic-bezier(.4,0,.2,1)}
+.screen.leaving{transform:none;opacity:1;visibility:visible;z-index:1;transition:none}
+
+/* preview: plain white backdrop behind the phone */
+html,body,#viewport{background:#fff!important}
+
+/* digits flip through numbers then lock in — no clipping window, so nothing is ever cut off */
+.num .odo .d{overflow:visible!important;clip-path:none!important;height:1.14em;display:inline-block;text-align:center;position:relative}
+.num .odo .d i{font-style:normal;display:block;height:1.14em;line-height:1.14em;white-space:nowrap}
+.num .odo .d i.spin{opacity:.9;transform:translateY(-.02em)}
+.num .odo .d i.land{animation:digitLand .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes digitLand{0%{transform:translateY(-.14em) scale(1.08)}100%{transform:none}}
+.num .odo .reel{display:none}
+.num .odo .d i{background:var(--grad);background-size:var(--W,100%) 100%;background-position:var(--ox,0) 0;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ===== rolling reels, edges fade softly instead of being cut (matches the A prototype) ===== */
+.num .odo{display:inline-block!important;white-space:nowrap;line-height:1.26;position:relative}
+.num .odo .d{display:inline-block!important;box-sizing:content-box;height:1.6em!important;overflow:hidden!important;clip-path:none!important;vertical-align:top;padding:0 .1em!important;margin:-.17em -.1em!important;text-align:center;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 27%,#000 73%,transparent);mask-image:linear-gradient(180deg,transparent 0,#000 27%,#000 73%,transparent)}
+.num .odo .reel{display:flex!important;flex-direction:column;transform:translateY(0);transition:transform 1.5s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--k,0)*90ms)}
+.num .odo .reel i{font-style:normal;display:block;height:1.6em!important;line-height:1.6em!important;background:var(--grad);background-size:var(--W,100%) 100%;background-position:var(--ox,0) 0;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;transform:none;animation:none;opacity:1}
+.num .odo .c{display:inline-block;line-height:1.26em;width:.24em;text-align:center;vertical-align:top}
+
+/* 5-digit number (61,300) is a touch smaller so the wider digit spacing still fits the screen */
+
+
+/* page 10: new device image (already tilted, no treats baked in) */
+.s10 .device{width:127px;height:170px;overflow:visible;transform:none}
+.s10 .device img{position:absolute;left:0;top:0;width:100%;height:100%}
+.s10 .treat.t1,.s10 .treat.t2,.s10 .treat.t3{left:113px;top:573px}
+/* numbers: design spacing (each digit as wide as itself), side room so wide glyphs are never clipped */
+.num .odo .d{padding:0 .3em!important;margin:-.17em -.3em!important}
+
+/* ---- entrance transitions (wrapper animates, so existing float/bob animations keep working) ---- */
+.enw{position:absolute;inset:0;pointer-events:none}
+.enw > *{position:absolute}
+.screen.active .enw{animation:enPop .85s cubic-bezier(.2,1.25,.35,1) var(--ed,.3s) backwards}
+.screen.active .enw.en-l{animation-name:enL}
+.screen.active .enw.en-r{animation-name:enR}
+.screen.active .enw.en-u{animation-name:enU}
+.screen.active .enw.en-d{animation-name:enD}
+@keyframes enPop{from{opacity:0;transform:scale(.45)}}
+@keyframes enL{from{opacity:0;transform:translateX(-110px) scale(.92)}}
+@keyframes enR{from{opacity:0;transform:translateX(110px) scale(.92)}}
+@keyframes enU{from{opacity:0;transform:translateY(90px) scale(.92)}}
+@keyframes enD{from{opacity:0;transform:translateY(-80px) scale(.92)}}
+
+/* page 10 waves: flat (no tilt), full strength, gentle breathing */
+.s10 .wave.pulse-wave{animation:waveQ 2.2s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes waveQ{0%,100%{transform:scaleY(.88)}50%{transform:scaleY(1.08)}}
+
+/* page 11: no purple glow at the bottom (fade the background art out into white) */
+.s11 .reveal-bg{-webkit-mask-image:linear-gradient(180deg,#000 0,#000 60%,transparent 78%);mask-image:linear-gradient(180deg,#000 0,#000 60%,transparent 78%)}
+
+/* page 11 -> 12: soft swipe up. New page glides up while fading in over the old one, which drifts up and fades out last. No edges. */
+.screen.exit-up{transform:translateY(-9%)!important;opacity:0!important;visibility:visible!important;z-index:1!important;
+  transition:transform 1s cubic-bezier(.3,.7,.2,1),opacity .35s ease .65s!important}
+.screen.enter-up{transform:translateY(14%)!important;opacity:0!important;visibility:visible!important;z-index:2!important;transition:none!important}
+.screen.sliding{z-index:2!important;transition:transform 1s cubic-bezier(.22,.8,.25,1),opacity .75s ease!important}
+
+/* ---- caption appears after the number lands; comma travels with the digits ---- */
+.stat .cap{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.9,.3,1)}
+.stat.cap-in .cap{opacity:1;transform:none}
+.num .odo .c{opacity:0;transition:opacity .5s ease;transition-delay:calc(var(--k,0)*90ms + 350ms)}
+.num .odo .c.on{opacity:1}
+
+/* ---- CTA drop shadow, 15% stronger ---- */
+.btn-share{box-shadow:0 4.6px 9.8px rgba(0,0,0,.133)}
+.s12.active .btn-share{box-shadow:0 4.6px 9.8px rgba(0,0,0,.133)}
+.cta-yellow{box-shadow:0 6.9px 18.4px rgba(247,205,61,.6)}
+
+/* comma: same gradient as digits (set per element by the script) */
+.num .odo .c{background:var(--grad);background-size:var(--W,100%) 100%;background-position:var(--ox,0) 0;background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .cap{transition:opacity .45s ease,transform .5s cubic-bezier(.2,.9,.3,1)}
+
+/* page 3: number 10% smaller, more air above the caption */
+.s3 .num{font-size:90px}
+.s3 .stat .cap{margin-top:12px}
+
+/* labels (Top 4% ...) wait for the numbers, then fade up; the shine is a soft slow sweep */
+.badge.gold{opacity:0;transform:translateY(8px) scale(.96);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.9,.3,1)}
+.screen.nums-done .badge.gold{opacity:1;transform:none}
+.badge::after{width:70%;left:-80%;background:linear-gradient(105deg,rgba(255,255,255,0) 0,rgba(255,255,255,.18) 30%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.18) 70%,rgba(255,255,255,0) 100%);filter:blur(2px);animation:none}
+.screen.nums-done .badge::after{animation:shineSoft 6s cubic-bezier(.45,0,.25,1) 1.1s infinite}
+@keyframes shineSoft{0%{left:-80%}28%,100%{left:120%}}
+
+/* page 2 (updated Figma): calendar sits lower so it clears the number; ring disc is centred on the 328 block */
+.calendar{top:490px!important}
+.ring-img{left:28.2px!important;top:227.8px!important;width:334px!important;height:339px!important;transform-origin:44.8% 54.5%!important}
+
+/* page 4 + 10: larger bubble numbers (Figma) */
+.s4 .s4num{font-size:114px;height:93.7px}
+.s4 .s4cap{font-size:27.433px;line-height:34px;margin-top:5.7px}
+.s10 .s10num{font-size:114px;height:92px}
+.s10 .s10cap{font-size:22.615px;line-height:35.8px;margin-top:1.9px}
+.s10 .device{width:153px;height:205px}
+
+/* page 10: furbo 15% larger + little shake; stronger, livelier waves */
+.s10 .device{width:176px;height:236px}
+.s10 .device{animation:devShake 3.4s ease-in-out 1.6s infinite;transform-origin:50% 90%}
+@keyframes devShake{0%,70%,100%{transform:rotate(0)}74%{transform:rotate(-2.6deg) translateX(-2px)}78%{transform:rotate(2.4deg) translateX(2px)}82%{transform:rotate(-1.8deg) translateX(-1px)}86%{transform:rotate(1.4deg)}90%{transform:rotate(-.6deg)}}
+.s10 .wave.pulse-wave{animation:waveBig 1.1s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes waveBig{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1.25)}}
+
+/* page 8: phone 10px lower */
+.phone-img{top:416px!important}
+/* page 10: calmer, more natural wave movement */
+.s10 .wave.pulse-wave{animation:waveCalm 2.8s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes waveCalm{0%,100%{transform:scaleY(.93)}50%{transform:scaleY(1.07)}}
+
+/* page 7: new layout (round photos) */
+.s7 .circ{position:absolute;opacity:0;z-index:2}
+.s7.active .circ{animation:circIn .8s cubic-bezier(.2,1.35,.4,1) both;animation-delay:var(--d)}
+@keyframes circIn{from{opacity:0;transform:translateY(70px) scale(.75)}to{opacity:1;transform:none}}
+.s7 .crown{z-index:3}
+/* page 8: phone 5% smaller, 10px lower */
+.phone-img{left:-94.6px!important;top:434px!important;width:282.2px!important;height:302.1px!important}
+
+/* page 7: pet photos + crowns drift gently up and down; crowns get a sheen */
+.s7.active .circ{animation:circIn .8s cubic-bezier(.2,1.35,.4,1) both,petFloat 4.2s ease-in-out 1.5s infinite}
+.s7.active .circ.cD{animation:circIn .8s cubic-bezier(.2,1.35,.4,1) both,petFloat 4.2s ease-in-out 2.4s infinite}
+.s7.active .crown.cA{animation:crownDrop .75s cubic-bezier(.2,1.8,.4,1) both,petFloat 4.2s ease-in-out 1.5s infinite}
+.s7.active .crown.cB{animation:crownDrop .75s cubic-bezier(.2,1.8,.4,1) both,petFloat 4.2s ease-in-out 2.4s infinite}
+@keyframes petFloat{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.sheen{position:absolute;z-index:4;pointer-events:none;opacity:0;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.95) 50%,transparent 70%);background-size:300% 100%;background-position:130% 0}
+.s7.active .sheen.shA{animation:petFloat 4.2s ease-in-out 1.5s infinite,crownSheen 3.4s ease-in-out 2s infinite}
+.s7.active .sheen.shB{animation:petFloat 4.2s ease-in-out 2.4s infinite,crownSheen 3.4s ease-in-out 2.5s infinite}
+@keyframes crownSheen{0%{background-position:130% 0;opacity:0}4%{opacity:1}34%{background-position:-30% 0;opacity:1}38%,100%{background-position:-30% 0;opacity:0}}
+
+/* page 10: sound waves 20% lighter */
+.s10 .wave{opacity:.8}
+
+/* page 6: paw prints stamp in step with the dotted trail, then fade and loop together */
+.s6 .paw{opacity:0}
+.s6.active .paw.p1{animation:pawLoop1 4.2s infinite both}
+.s6.active .paw.p2{animation:pawLoop2 4.2s infinite both}
+@keyframes pawLoop1{0%,42%{opacity:0;scale:2.2}50%{opacity:1;scale:1}92%{opacity:1;scale:1}100%{opacity:0;scale:1}}
+@keyframes pawLoop2{0%,56%{opacity:0;scale:2.2}64%{opacity:1;scale:1}92%{opacity:1;scale:1}100%{opacity:0;scale:1}}
+
+/* ---- phones & tablets: full screen, no device frame, no fake status bar (the real one is already there) ---- */
+html.fullscreen #phone{border-radius:0;box-shadow:none}
+html.fullscreen #hint{display:none}
+html.fullscreen .statusbar,html.fullscreen .sb-plain{display:none}
+html,body{overscroll-behavior:none}
+#viewport{touch-action:none}
+@media (max-width:520px),(pointer:coarse){.statusbar,.sb-plain{display:none}#hint{display:none}}
+
+/* ---- full-screen phones: page fills edge to edge; side areas continue the page colours ---- */
+#sides{display:none}
+html.fullscreen #sides{display:block;position:absolute;inset:0}
+.sf{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.sf.on{opacity:1}
+.sf .l,.sf .r{position:absolute;top:0;bottom:0;width:51%}
+.sf .l{left:0}.sf .r{right:0}
+html.fullscreen #phone{width:100%;height:100%;background:#fff}
+html.fullscreen #stage{left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--scale));transform-origin:center center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%)}
+
+/* page 5: sound waves sit in the exact middle of each bubble (flex centring, no offsets) */
+.s5 .chip{display:flex;align-items:center;justify-content:center}
+.s5 .chip .wf{position:static!important;width:72%!important;height:auto!important;transform:none;margin:0 0 9% 0;animation:wfBeat 1.1s ease-in-out infinite}
+.s5 .chipR .wf{animation-name:wfBeat;rotate:-176deg;margin:0 0 9% 0}
+@keyframes wfBeat{0%,100%{transform:scaleY(.7)}50%{transform:scaleY(1.15)}}
+
+/* phones: stage pinned to the top of the visible window; scale = screen width */
+html.fullscreen #stage{left:50%!important;top:calc(var(--sy,0) * 1px)!important;transform:translateX(-50%) scale(var(--scale))!important;transform-origin:top center!important;-webkit-mask-image:none!important;mask-image:none!important}
+html.fullscreen .btn-share,html.fullscreen .cta,html.fullscreen .btn-replay{margin-top:calc(var(--lift,0) * -1px)}
+
+/* page 2: no yellow glow by the calendar */
+.paw-glow{display:none!important;animation:none!important}
+/* page 5: speech bubbles always in front of the dog photo */
+.s5 .dog-round{z-index:2!important}
+.s5 .chip{z-index:6!important}
+
+
+/* ===== v9 · new Figma flow (10 screens) ===== */
+.pill-img{left:0;top:0;transform:none}
+@keyframes pillImgIn{from{opacity:0;transform:translateY(10px) scale(.7)}to{opacity:1;transform:none}}
+.pill-spark{position:absolute;pointer-events:none;rotate:-10.51deg;display:none}
+.pill-spark.on{display:block}
+.pill-spark.pop-in{animation:pillImgIn .6s cubic-bezier(.2,1.4,.4,1) both .25s}
+.reveal-bg{left:-4.7px;top:-56px;width:398px;height:796px}
+.reveal-avatar{top:312px}
+.result-bg{left:-11.5px;top:0;width:407px;height:880px;object-fit:fill}
+.r-pre{top:153px}
+.r-title{top:190.6px}
+.r-tags{top:284px}
+.r-mascot{left:240px;top:153px;width:170px}
+.r-line{left:81.5px;top:467.5px;width:224.5px;height:3px;opacity:0}
+.s12.active .r-line{animation:pop .7s cubic-bezier(.2,1.3,.4,1) .85s both}
+
+.phone-img{left:-66px!important;top:455px!important;width:240px!important;height:257px!important}
+
+.phone-img{opacity:1!important}
+.phone-img img,.phone-img i{position:absolute;display:block}
+.phone-img .pb{left:0;top:0;width:240px;height:257px;opacity:.8}
+.phone-img .pw{left:86.94px;top:127.53px;width:94.49px;height:93.06px;border-radius:12.52px;background:#fff;filter:blur(3.4px);opacity:.8;rotate:-13.15deg}
+.phone-img .py{left:96.79px;top:136.3px;width:75.12px;height:75.12px;border-radius:12.52px;background:#f7cd3d;rotate:-13.15deg}
+.phone-img .pl{left:107.6px;top:155.4px;width:55.17px;height:35.18px;rotate:-12.74deg}
+.btn-replay{top:731px}
+
+/* ===== v9 · copy update (Figma refresh) ===== */
+.cap,.cap-d{font-family:'Poppins',system-ui,sans-serif}
+.s3 .cap,.s9 .cap,.s8 .cap,.cap-d{font-size:22px}
+.badge .pct{font-weight:700;font-size:22px}
+.badge .pct20{font-size:20px}
+.badge.gold{border-radius:999px;padding:4px 12px 6px;color:#434343}
+.cover-wrapped{left:32px;top:520px;width:216px;background:linear-gradient(164deg,#9B75FB 1.4%,#5197D8 99.9%);-webkit-background-clip:text;background-clip:text}
+.cover-sub{left:45px;top:650px;line-height:normal}
+.cta-white{left:65px;width:260px;background:#fff;box-shadow:0 4px 8.5px rgba(0,0,0,.1)}
+.reveal-bg{top:-15px}
+.reveal-avatar{top:345px}
+.swipe{top:667px}
+.swipe-label{font-size:18px}
+.r-pre{top:144px;color:#434343}
+.r-title{top:177.6px}
+.r-desc{top:243px;left:16.5px!important;right:auto!important;width:265.8px;font:500 15px/22px 'Poppins';color:#434343}
+.r-tags{top:361px;left:-4px!important;right:auto!important;width:219px;margin-left:46px;font:500 13px/normal 'Poppins';color:#5170D7}
+.s12 .r-desc{opacity:0}
+.s12.active .r-desc{animation:pop .7s cubic-bezier(.2,1.3,.4,1) .9s both}
+.r-line{left:75px;top:547.5px;width:232px;height:.5px}
+.s12 .btn-share{top:678px;left:59px;width:270px}
+.s12.active .btn-share{box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.btn-replay{top:746px}
+.exit-r{position:absolute;left:350px;top:66px;width:24px;height:24px;z-index:6;pointer-events:auto;opacity:0}
+.s12.active .exit-r{opacity:1;transition:opacity .4s .6s}
+.exit-r img{width:24px;height:24px}
+.exit-r{right:auto}
+.r-tags{left:40px!important;margin-left:0}
+.r-line{height:1px}
+
+.reveal-bg{top:-56px}
+.reveal-avatar{top:312px}
+.reveal-sub{left:0;top:474px;width:390px;text-align:center;font:500 18px/normal 'Poppins';letter-spacing:.18px;color:#434343}
+.s9 .stat .badge{display:inline-block;width:auto}
+/* nudge cover CTA and swipe-up 15px down */
+.cta{top:741px}
+.swipe{top:682px}
