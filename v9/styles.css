@@ -745,3 +745,18 @@ html.fullscreen .btn-share,html.fullscreen .cta,html.fullscreen .btn-replay{marg
 /* nudge cover CTA and swipe-up 15px down */
 .cta{top:741px}
 .swipe{top:682px}
+
+/* ---- v9 phone fixes ---- */
+/* cover: on short phone screens (browser toolbars) lift the line + CTA so nothing is cut off */
+html.fullscreen .s1 .cta,html.fullscreen .s1 .cover-sub{margin-top:calc(var(--vd,0) * -1px - min(calc(var(--vd,0) * 1px), 26px))!important}
+/* page 4: paws stay clear of the card - they shift with the card, not on their own */
+.paw.p1{top:672px}
+.paw.p2{top:648px}
+.s6 .paw{margin-top:calc(var(--vd,0) * -.56px)!important}
+.paw.p1{left:272px;top:676px}
+.paw.p2{left:344px;top:648px}
+
+/* page 9 avatar: supplied bubble artwork */
+.reveal-avatar{left:227px;top:281px;width:228px;height:228px;transform:none}
+.reveal-avatar img{position:absolute;inset:0;width:100%;height:100%}
+.reveal-avatar{left:244px;top:290px;width:193.8px;height:193.8px}

@@ -193,12 +193,19 @@
   /* ---------- input ---------- */
   let down = null;
   stage.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY, t: Date.now(), target: e.target }; });
+  stage.addEventListener('pointermove', e => {                // trigger the reveal as soon as the finger has travelled far enough up
+    if (!down || cur !== REVEAL) return;
+    const sc = +getComputedStyle(document.documentElement).getPropertyValue('--scale') || 1;
+    if ((e.clientY - down.y) / sc < -55 && Math.abs(e.clientX - down.x) / sc < 90) { down = null; reveal(); }
+  });
+  stage.addEventListener('pointercancel', () => { down = null; });
   stage.addEventListener('pointerup', e => {
     if (!down) return;
     const d = down; down = null;
-    if (d.target.closest('button, .sheet')) return;
     const s = +getComputedStyle(document.documentElement).getPropertyValue('--scale') || 1;
     const dx = (e.clientX - d.x) / s, dy = (e.clientY - d.y) / s;
+    if (cur === REVEAL && dy < -40 && Math.abs(dx) < 90 && !d.target.closest('.sheet')) { reveal(); return; }   // swipe up works even when the drag starts on the arrow button
+    if (d.target.closest('button, .sheet')) return;
     const rect = stage.getBoundingClientRect();
     const px = (e.clientX - rect.left) / s, py = (e.clientY - rect.top) / s;
     if (dy < -60 && Math.abs(dx) < 80) { if (cur === REVEAL) reveal(); else if (cur < REVEAL) next(); return; }
